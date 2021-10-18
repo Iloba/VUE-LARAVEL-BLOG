@@ -1,0 +1,55 @@
+// // Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+//My styles
+@media (max-width: 500px) {
+    #login-image{
+        display: none;
+    }
+}
+@media (max-width: 774px) {
+    #login-image{
+        display: none;
+    }
+}
+@media (max-width: 938px) {
+    #login-image{
+        display: none;
+    }
+    #form-box{
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    #mobile-login{
+        margin-bottom: 10px;
+        width: 100%;
+        margin-left: 0;
+    }
+    #mobile-register{
+        margin-top: 10px;
+        width: 100%;
+        margin-right: -10px;
+    }
+    .mr-auto .nav-item .nav-link{
+        text-align: center;
+    }
+}
+.form-control{
+    border-radius: 0px;
+}
+.form-control:focus{
+    box-shadow: none;
+    border: 1.5px solid var(--info);
+}
+.btn{
+    border-radius: 0px;
+}
+
