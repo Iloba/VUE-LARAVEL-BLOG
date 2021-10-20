@@ -38158,7 +38158,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v("Welcome to your Dashbord")]),
-    _vm._v(" "),
+    _vm._v(
+      "\n    Name:  " +
+        _vm._s(_vm.user.name) +
+        "\n    Email: " +
+        _vm._s(_vm.user.email) +
+        "\n    "
+    ),
     _c(
       "button",
       {

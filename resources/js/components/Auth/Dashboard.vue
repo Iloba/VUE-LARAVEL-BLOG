@@ -1,8 +1,8 @@
 <template>
         <div class="container">
             <h1>Welcome to your Dashbord</h1>
-            <!-- Name:  {{ user.name }}
-            Email: {{ user.email }} -->
+            Name:  {{ user.name }}
+            Email: {{ user.email }}
             <button @click.prevent="logout" class="btn btn-info">Logout</button>
         </div>
 </template>
