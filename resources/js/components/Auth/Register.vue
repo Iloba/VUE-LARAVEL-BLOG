@@ -62,7 +62,7 @@ export default {
         signupuser(){
             axios.post('/api/register', this.form)
             .then(res => {
-                alert('Congratulation, your registration was successful You can now login to your Dashboard');
+                alert(res.data);
                  this.$router.push({name: 'Login'});
                 this.form = '';
             }).catch(error => {

@@ -2070,19 +2070,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       user: null
     };
   },
-  methods: {},
   mounted: function mounted() {
     var _this = this;
 
     axios.get('/api/user').then(function (res) {
       _this.user = res.data;
     });
+  },
+  methods: {
+    logout: function logout() {
+      var _this2 = this;
+
+      axios.post('/api/logout').then(function () {
+        //if successful, redirect user to login page(component)
+        _this2.$router.push({
+          name: 'Login'
+        });
+      });
+    }
   }
 });
 
@@ -2149,11 +2163,9 @@ __webpack_require__.r(__webpack_exports__);
     signin: function signin() {
       var _this = this;
 
-      axios.post('/api/signin', this.form).then(function (res) {
-        alert('Login Successful');
-
+      axios.post('/api/signin', this.form).then(function () {
         _this.$router.push({
-          name: 'Dashboard'
+          name: "Dashboard"
         });
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
@@ -2239,7 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/register', this.form).then(function (res) {
-        alert('Congratulation, your registration was successful You can now login to your Dashboard');
+        alert(res.data);
 
         _this.$router.push({
           name: 'Login'
@@ -2388,9 +2400,9 @@ __webpack_require__.r(__webpack_exports__);
     path: '/dashboard',
     component: _components_Auth_Dashboard__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'Dashboard',
-    //authenticate user
+    //  authenticate user
     beforeEnter: function beforeEnter(to, from, next) {
-      axios.get('api/authenticated').then(function () {
+      axios.get('/api/authenticated').then(function () {
         next();
       })["catch"](function () {
         return next({
@@ -38144,7 +38156,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n   " + _vm._s(_vm.user.name) + "\n")])
+  return _c("div", { staticClass: "container" }, [
+    _c("h1", [_vm._v("Welcome to your Dashbord")]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-info",
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.logout.apply(null, arguments)
+          }
+        }
+      },
+      [_vm._v("Logout")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38292,13 +38320,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "name" } }, [_c("b", [_vm._v("Email")])])
+    return _c("label", { attrs: { for: "email" } }, [
+      _c("b", [_vm._v("Email")])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "name" } }, [
+    return _c("label", { attrs: { for: "password" } }, [
       _c("b", [_vm._v("Pasword")])
     ])
   },

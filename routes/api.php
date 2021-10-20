@@ -25,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
 // My routes
 Route::post('/register', [UserAuthController::class, 'register'])->name('register.user');
 Route::post('/signin', [UserAuthController::class, 'signin'])->name('signin.user');
+Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout.user');

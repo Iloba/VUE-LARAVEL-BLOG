@@ -33,11 +33,11 @@ export default {
             component: Dashboard,
             name: 'Dashboard',
             
-             //authenticate user
+            //  authenticate user
              beforeEnter: (to, from, next) => {
-                axios.get('api/authenticated')
+                axios.get('/api/authenticated')
                 .then(() => {
-                    next()
+                    next();
                 }).catch(()=>{
                     return next({name: 'Login'});
                 })

@@ -11,13 +11,13 @@
                                         <div class="card shadow-sm p-4">
                                                 <form  @submit.prevent="signin()">   
                                                         <div class="form-group">  
-                                                                <label for="name"><b>Email</b></label>
+                                                                <label for="email"><b>Email</b></label>
                                                                 <input type="text" v-model="form.email" class="form-control" placeholder="e.g akin@gmail.com">
                                                                 <small v-if="errors.email" class="text-danger">{{errors.email[0]}}</small>
                                                         </div>
                                                         
                                                         <div class="form-group">
-                                                                 <label for="name"><b>Pasword</b></label>
+                                                                 <label for="password"><b>Pasword</b></label>
                                                                 <input type="password" v-model="form.password" class="form-control" placeholder="Enter a valid password">
                                                                 <small v-if="errors.password" class="text-danger">{{errors.password[0]}}</small>
                                                         </div>
@@ -47,14 +47,14 @@ export default {
     },
     methods: {
         signin(){
-          axios.post('/api/signin', this.form)
-          .then(res => {
-                  alert('Login Successful');
-                  this.$router.push({name: 'Dashboard'});
-          })
-          .catch(error => {
-               this.errors = error.response.data.errors; 
-          })
+
+              axios.post('/api/signin', this.form)
+              .then(() => {
+                      this.$router.push({name: "Dashboard"});
+              }).catch((error) => {
+                      this.errors = error.response.data.errors;
+              });  
+
         }
     }
 }

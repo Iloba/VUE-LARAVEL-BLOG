@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\UserAuth;
 
+
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserAuthController extends Controller
 {
@@ -17,7 +19,7 @@ class UserAuthController extends Controller
         //Validate Request
         $request->validate([
             'name' => ['required', 'String'],
-            'email' => ['required', 'String'],
+            'email' => ['required', 'email', 'unique:users', 'String'],
             'phone' => ['required', 'String', 'max:11'],
             'password' => ['required', 'String', 'min:8', 'confirmed'],
             'password_confirmation' => ['required', 'String', 'min:8'],
@@ -34,6 +36,10 @@ class UserAuthController extends Controller
 
         $user->save();
 
+        return response()->json('Congratulation, your registration was successful You can now login to your Dashboard');
+
+        
+
 
         
     }
@@ -46,14 +52,24 @@ class UserAuthController extends Controller
             'password' => ['required', 'min:8']
         ]);
 
-        //Login User
-        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)){
-
-            return response()->json('Your Login was Successful');
-        }else{
-            return response()->json('Invalid Credentials');
+        //login user
+        if(Auth::attempt($request->only('email', 'password'))){
+            return response()->json(Auth::user(), 200);
         }
+
+
+        //Throw error is process of login fails
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are not correct']
+        ]);
+
+        
+    }
+
+    public function logout(){
+        
+        //logout User
+        Auth::logout();
     }
 }
